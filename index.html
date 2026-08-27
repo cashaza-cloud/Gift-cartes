@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achat de Cartes Cadeaux - Cashaza</title>
+    <title>Boutique - Cashaza</title>
     <style>
         * {
             box-sizing: border-box;
@@ -45,17 +45,21 @@
             color: #4b5563;
             font-size: 14px;
         }
-        input {
+        select, input {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e5e7eb;
             border-radius: 8px;
             font-size: 16px;
             outline: none;
+            background-color: white;
             transition: border-color 0.2s;
         }
-        input:focus {
+        select:focus, input:focus {
             border-color: #7c3aed;
+        }
+        .champ-quantite {
+            margin-top: 15px;
         }
         button {
             background-color: #7c3aed;
@@ -67,7 +71,7 @@
             width: 100%;
             font-size: 16px;
             font-weight: 600;
-            margin-top: 10px;
+            margin-top: 20px;
             transition: background-color 0.2s, transform 0.1s;
         }
         button:hover {
@@ -88,8 +92,18 @@
 <div class="conteneur">
     <h1>Boutique Cashaza</h1>
     
+    <!-- Choix du produit -->
     <div class="form-group">
-        <label for="quantite">Nombre de clés / cartes :</label>
+        <label for="produit">Choisissez votre offre :</label>
+        <select id="produit" onchange="changerOffre()">
+            <option value="unitaire">Clés à l'unité</option>
+            <option value="illimite">Clés Illimitées (125 €/mois)</option>
+        </select>
+    </div>
+
+    <!-- Champ quantité (uniquement pour les clés à l'unité) -->
+    <div class="form-group champ-quantite" id="groupe-quantite">
+        <label for="quantite">Nombre de clés :</label>
         <input type="number" id="quantite" value="1" min="1">
     </div>
 
@@ -101,10 +115,33 @@
 </div>
 
 <script>
+// Liens Lemon Squeezy pour chaque produit
+const lienUnitaire = "https://renxcashaza.lemonsqueezy.com/checkout/buy/85bd5ac3-7f3f-4476-9774-5701c3f76be0";
+const lienIllimite = "https://renxcashaza.lemonsqueezy.com/checkout/buy/c1c28560-ba65-44de-b851-d5882a29216a";
+
+function changerOffre() {
+    let choix = document.getElementById('produit').value;
+    let groupeQuantite = document.getElementById('groupe-quantite');
+    
+    // Cache le champ quantité si l'abonnement illimité est sélectionné
+    if (choix === 'illimite') {
+        groupeQuantite.style.display = 'none';
+    } else {
+        groupeQuantite.style.display = 'block';
+    }
+}
+
 function payerAvecLemonSqueezy() {
-    let quantite = document.getElementById('quantite').value;
-    let lienBase = "https://renxcashaza.lemonsqueezy.com/checkout/buy/85bd5ac3-7f3f-4476-9774-5701c3f76be0";
-    let lienFinal = lienBase + "?quantity=" + quantite;
+    let choix = document.getElementById('produit').value;
+    let lienFinal = "";
+
+    if (choix === 'illimite') {
+        lienFinal = lienIllimite;
+    } else {
+        let quantite = document.getElementById('quantite').value;
+        lienFinal = lienUnitaire + "?quantity=" + quantite;
+    }
+
     window.location.href = lienFinal;
 }
 </script>

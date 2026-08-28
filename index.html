@@ -148,3 +148,29 @@ function payerAvecLemonSqueezy() {
 
 </body>
 </html>
+<!-- Inclusion du SDK Supabase via CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<div class="card-uploader-container">
+  <h2>Personnalise ta carte cadeau physique</h2>
+  
+  <form id="gift-card-form">
+    <!-- Upload de l'image -->
+    <div class="form-group">
+      <label for="card-image">Image pour la carte (PNG/JPG) :</label>
+      <input type="file" id="card-image" accept="image/png, image/jpeg" required />
+    </div>
+
+    <!-- Informations du client -->
+    <div class="form-group">
+      <label for="client-email">Ton e-mail :</label>
+      <input type="email" id="client-email" placeholder="exemple@email.com" required />
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="submit" id="submit-btn">Commander ma carte</button>
+  </form>
+
+  <!-- Zone de message d'état -->
+  <div id="status-message"></div>
+</div>

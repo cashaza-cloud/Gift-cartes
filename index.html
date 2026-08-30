@@ -1,182 +1,257 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boutique Cash'aza</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        h1, h2 {
-            color: #1f2937;
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        h2 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #374151;
-            font-size: 14px;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-            box-sizing: border-box;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        input:focus, select:focus {
-            border-color: #2563eb;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .btn {
-            background-color: #2563eb;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-        .btn:hover {
-            background-color: #1d4ed8;
-        }
-        .btn:active {
-            transform: scale(0.98);
-        }
-        .btn-secondary {
-            background-color: #4b5563;
-        }
-        .btn-secondary:hover {
-            background-color: #374151;
-        }
-        .error-message {
-            color: #dc2626;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-        .success-message {
-            color: #16a34a;
-            font-size: 14px;
-            margin-top: 15px;
-            text-align: center;
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique Cashaza</title>
+  
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .conteneur {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #1f2937;
+      font-size: 24px;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .groupe-formulaire {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #4b5563;
+      font-size: 14px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input:focus {
+      border-color: #7c3aed;
+    }
+
+    .champ-quantite {
+      margin-top: 15px;
+    }
+
+    button {
+      background-color: #7c3aed;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    button:hover {
+      background-color: #6d28d9;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .texte-de-pied {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Boutique Cash'aza</h1>
-        
-        <div class="form-group">
-            <label for="produit">Choisissez votre offre</label>
-            <select id="produit">
-                <option value="1">Carte cadeau Amazon 10€</option>
-                <option value="2">Carte cadeau Google Play 15€</option>
-                <option value="3">Robux 800 (Roblox)</option>
-            </select>
-        </div>
-
-        <div class="form-group" id="champ-quantite" style="display: none;">
-            <label for="quantite">Quantité</label>
-            <input type="number" id="quantite" value="1" min="1">
-        </div>
-
-        <div class="form-group" id="champ-paiement">
-            <label for="paiement">Méthode de paiement</label>
-            <select id="paiement">
-                <option value="solde">Solde Cash'aza</option>
-                <option value="paypal">PayPal</option>
-                <option value="cb">Carte bancaire</option>
-            </select>
-        </div>
-
-        <div class="form-group" id="champ-email" style="display: none;">
-            <label for="email">Adresse email pour recevoir le code</label>
-            <input type="email" id="email" placeholder="votre@email.com">
-        </div>
-
-        <button class="btn" id="btn-acheter">Acheter</button>
-        <div class="success-message" id="success-msg">Achat effectué avec succès !</div>
+  <!-- 1. Boutique Lemon Squeezy -->
+  <div class="conteneur">
+    <h1>Boutique Cashaza</h1>
+    
+    <div class="groupe-formulaire">
+      <label for="produit">Choisissez votre offre :</label>
+      <select id="produit" onchange="changerOffre()">
+        <option value="unitaire">Clés à l'unité</option>
+        <option value="illimite">Clés illimitées (125 €/mois)</option>
+      </select>
     </div>
 
-    <script>
-        const produitSelect = document.getElementById('produit');
-        const champQuantite = document.getElementById('champ-quantite');
-        const quantiteInput = document.getElementById('quantite');
-        const paiementSelect = document.getElementById('paiement');
-        const champEmail = document.getElementById('champ-email');
-        const emailInput = document.getElementById('email');
-        const btnAcheter = document.getElementById('btn-acheter');
-        const successMsg = document.getElementById('success-msg');
+    <div class="groupe-formulaire champ-quantite" id="groupe-quantite">
+      <label for="quantite">Nombre de clés :</label>
+      <input type="number" id="quantite" value="1" min="1">
+    </div>
 
-        produitSelect.addEventListener('change', () => {
-            if (produitSelect.value === '3') {
-                champQuantite.style.display = 'block';
-            } else {
-                champQuantite.style.display = 'none';
-            }
+    <button id="payer-btn" onclick="payerAvecLemonSqueezy()">
+      Procéder au paiement
+    </button>
+
+    <div class="texte-de-pied">Paiements sécurisés via Lemon Squeezy</div>
+  </div>
+
+  <!-- 2. Formulaire Carte Cadeau Physique + Supabase -->
+  <div class="conteneur">
+    <h2>Personnalise ta carte cadeau physique</h2>
+    
+    <form id="gift-card-form">
+      <div class="groupe-formulaire">
+        <label for="card-image">Image pour la carte (PNG/JPG) :</label>
+        <input type="file" id="card-image" accept="image/png, image/jpeg" required />
+      </div>
+
+      <div class="groupe-formulaire">
+        <label for="client-email">Ton e-mail :</label>
+        <input type="email" id="client-email" placeholder="exemple@email.com" required />
+      </div>
+
+      <button type="submit" id="submit-btn">Commander ma carte</button>
+    </form>
+
+    <div id="status-message" style="margin-top: 15px; font-weight: 600;"></div>
+  </div>
+
+  <!-- Inclusion du SDK Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // Liens Lemon Squeezy
+    const lienUnitaire = "https://renxcashaza.lemonsqueezy.com/checkout/buy/85bd5ac3-7f3f-4476-9774-5701c3f76be0";
+    const lienIllimite = "https://renxcashaza.lemonsqueezy.com/checkout/buy/c1c28560-ba65-44de-b851-d5882a29216a";
+
+    function changerOffre() {
+      const choix = document.getElementById('produit').value;
+      const groupeQuantite = document.getElementById('groupe-quantite');
+
+      if (choix === 'illimite') {
+        groupeQuantite.style.display = 'none';
+      } else {
+        groupeQuantite.style.display = 'block';
+      }
+    }
+
+    function payerAvecLemonSqueezy() {
+      const choix = document.getElementById('produit').value;
+      let lienFinal = "";
+
+      if (choix === 'illimite') {
+        lienFinal = lienIllimite;
+      } else {
+        const quantite = document.getElementById('quantite').value;
+        lienFinal = lienUnitaire + "?quantite=" + quantite;
+      }
+
+      window.location.href = lienFinal;
+    }
+
+    // Initialisation de Supabase
+    const SUPABASE_URL = "https://aodiebdhmfgtomwpjzye.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_rrKnWkDG0ORvNIwVKB-LsA_lLCLOv09";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById('gift-card-form');
+    const statusMessage = document.getElementById('status-message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fileInput = document.getElementById('card-image');
+      const emailInput = document.getElementById('client-email');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        statusMessage.innerText = "Sélectionne une image.";
+        return;
+      }
+
+      try {
+        submitBtn.disabled = true;
+        statusMessage.innerText = "Upload de l'image en cours...";
+
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+        const filePath = `custom-cards/${fileName}`;
+
+        const { data: uploadData, error: uploadError } = await supabaseClient
+          .storage
+          .from('gift-cards')
+          .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: urlData } = supabaseClient
+          .storage
+          .from('gift-cards')
+          .getPublicUrl(filePath);
+
+        const imageUrl = urlData.publicUrl;
+        statusMessage.innerText = "Image envoyée ! Lancement de la commande...";
+
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/smart-service`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          },
+          body: JSON.stringify({
+            imageUrl: imageUrl,
+            userEmail: emailInput.value
+          })
         });
 
-        paiementSelect.addEventListener('change', () => {
-            if (paiementSelect.value === 'paypal' || paiementSelect.value === 'cb') {
-                champEmail.style.display = 'block';
-            } else {
-                champEmail.style.display = 'none';
-            }
-        });
+        const result = await response.json();
 
-        btnAcheter.addEventListener('click', () => {
-            const produit = produitSelect.value;
-            const paiement = paiementSelect.value;
-            const email = emailInput.value;
+        if (!response.ok) {
+          throw new Error(result.error || "Erreur lors de la création");
+        }
 
-            if ((paiement === 'paypal' || paiement === 'cb') && !email) {
-                alert('Veuillez entrer une adresse email valide.');
-                return;
-            }
+        statusMessage.innerText = "Commande validée avec succès !";
+        form.reset();
 
-            successMsg.style.display = 'block';
-            setTimeout(() => {
-                successMsg.style.display = 'none';
-            }, 4000);
-        });
-    </script>
+      } catch (err) {
+        console.error(err);
+        statusMessage.innerText = "Erreur : " + err.message;
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+
 </body>
-  </html>
-          champEmail.style.displaychampEmail.style.display
+        </html>
+      

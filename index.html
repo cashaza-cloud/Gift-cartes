@@ -258,4 +258,27 @@
 
 </body>
   </html>
-  
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || "Erreur lors de la création");
+        }
+
+        // Succès : texte en vert
+        statusMessage.style.color = "#10b981"; 
+        statusMessage.innerText = "Commande validée avec succès !";
+        form.reset();
+
+      } catch (err) {
+        console.error(err);
+        // Erreur : texte en rouge
+        statusMessage.style.color = "#ef4444"; 
+        statusMessage.innerText = "Erreur : " + err.message;
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>

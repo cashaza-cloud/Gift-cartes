@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique Cash'aza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        h1, h2 {
+            color: #1f2937;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #2563eb;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .btn {
+            background-color: #2563eb;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .btn-secondary {
+            background-color: #4b5563;
+        }
+        .btn-secondary:hover {
+            background-color: #374151;
+        }
+        .error-message {
+            color: #dc2626;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        .success-message {
+            color: #16a34a;
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="container">
+        <h1>Boutique Cash'aza</h1>
+        
+        <div class="form-group">
+            <label for="produit">Choisissez votre offre</label>
+            <select id="produit">
+                <option value="1">Carte cadeau Amazon 10€</option>
+                <option value="2">Carte cadeau Google Play 15€</option>
+                <option value="3">Robux 800 (Roblox)</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="champ-quantite" style="display: none;">
+            <label for="quantite">Quantité</label>
+            <input type="number" id="quantite" value="1" min="1">
+        </div>
+
+        <div class="form-group" id="champ-paiement">
+            <label for="paiement">Méthode de paiement</label>
+            <select id="paiement">
+                <option value="solde">Solde Cash'aza</option>
+                <option value="paypal">PayPal</option>
+                <option value="cb">Carte bancaire</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="champ-email" style="display: none;">
+            <label for="email">Adresse email pour recevoir le code</label>
+            <input type="email" id="email" placeholder="votre@email.com">
+        </div>
+
+        <button class="btn" id="btn-acheter">Acheter</button>
+        <div class="success-message" id="success-msg">Achat effectué avec succès !</div>
+    </div>
+
+    <script>
+        const produitSelect = document.getElementById('produit');
+        const champQuantite = document.getElementById('champ-quantite');
+        const quantiteInput = document.getElementById('quantite');
+        const paiementSelect = document.getElementById('paiement');
+        const champEmail = document.getElementById('champ-email');
+        const emailInput = document.getElementById('email');
+        const btnAcheter = document.getElementById('btn-acheter');
+        const successMsg = document.getElementById('success-msg');
+
+        produitSelect.addEventListener('change', () => {
+            if (produitSelect.value === '3') {
+                champQuantite.style.display = 'block';
+            } else {
+                champQuantite.style.display = 'none';
+            }
+        });
+
+        paiementSelect.addEventListener('change', () => {
+            if (paiementSelect.value === 'paypal' || paiementSelect.value === 'cb') {
+                champEmail.style.display = 'block';
+            } else {
+                champEmail.style.display = 'none';
+            }
+        });
+
+        btnAcheter.addEventListener('click', () => {
+            const produit = produitSelect.value;
+            const paiement = paiementSelect.value;
+            const email = emailInput.value;
+
+            if ((paiement === 'paypal' || paiement === 'cb') && !email) {
+                alert('Veuillez entrer une adresse email valide.');
+                return;
+            }
+
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 4000);
+        });
+    </script>
+</body>
+  </html>
+          champEmail.style.displaychampEmail.style.display

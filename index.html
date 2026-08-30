@@ -199,12 +199,14 @@
       const file = fileInput.files[0];
 
       if (!file) {
+        statusMessage.style.color = "#ef4444";
         statusMessage.innerText = "Sélectionne une image.";
         return;
       }
 
       try {
         submitBtn.disabled = true;
+        statusMessage.style.color = "#4b5563";
         statusMessage.innerText = "Upload de l'image en cours...";
 
         const fileExt = file.name.split('.').pop();
@@ -224,6 +226,7 @@
           .getPublicUrl(filePath);
 
         const imageUrl = urlData.publicUrl;
+        statusMessage.style.color = "#4b5563";
         statusMessage.innerText = "Image envoyée ! Lancement de la commande...";
 
         const response = await fetch(`${SUPABASE_URL}/functions/v1/smart-service`, {
@@ -244,35 +247,15 @@
           throw new Error(result.error || "Erreur lors de la création");
         }
 
-        statusMessage.innerText = "Commande validée avec succès !";
-        form.reset();
-
-      } catch (err) {
-        console.error(err);
-        statusMessage.innerText = "Erreur : " + err.message;
-      } finally {
-        submitBtn.disabled = false;
-      }
-    });
-  </script>
-
-</body>
-  </html>
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.error || "Erreur lors de la création");
-        }
-
         // Succès : texte en vert
-        statusMessage.style.color = "#10b981"; 
+        statusMessage.style.color = "#10b981";
         statusMessage.innerText = "Commande validée avec succès !";
         form.reset();
 
       } catch (err) {
         console.error(err);
         // Erreur : texte en rouge
-        statusMessage.style.color = "#ef4444"; 
+        statusMessage.style.color = "#ef4444";
         statusMessage.innerText = "Erreur : " + err.message;
       } finally {
         submitBtn.disabled = false;

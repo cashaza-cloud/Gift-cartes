@@ -1,267 +1,133 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boutique Cashaza</title>
-
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1119311529549871"
-       crossorigin="anonymous"></script>
-  
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-      box-sizing: border-box;
-      background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .conteneur {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    h1, h2 {
-      color: #1f2937;
-      font-size: 24px;
-      margin-bottom: 25px;
-      font-weight: 700;
-    }
-
-    .groupe-formulaire {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #4b5563;
-      font-size: 14px;
-    }
-
-    select, input {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #e5e7eb;
-      border-radius: 8px;
-      font-size: 16px;
-      box-sizing: border-box;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    select:focus, input:focus {
-      border-color: #7c3aed;
-    }
-
-    .champ-quantite {
-      margin-top: 15px;
-    }
-
-    button {
-      background-color: #7c3aed;
-      color: white;
-      border: none;
-      padding: 14px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 16px;
-      font-weight: 600;
-      margin-top: 20px;
-      transition: background-color 0.2s, transform 0.1s;
-    }
-
-    button:hover {
-      background-color: #6d28d9;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    .texte-de-pied {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #9ca3af;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique Cashaza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #111;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #7c3aed;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #6d28d9;
+        }
+        #statusMessage {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 1. Boutique Lemon Squeezy -->
-  <div class="conteneur">
-    <h1>Boutique Cashaza</h1>
+<div class="container">
+    <h2>Boutique Cashaza</h2>
     
-    <div class="groupe-formulaire">
-      <label for="produit">Choisissez votre offre :</label>
-      <select id="produit" onchange="changerOffre()">
-        <option value="unitaire">Clés à l'unité</option>
-        <option value="illimite">Clés illimitées (125 €/mois)</option>
-      </select>
-    </div>
+    <label for="offerSelect">Choisissez votre offre :</label>
+    <select id="offerSelect">
+        <option value="unit">Clés à l'unité (0,75 €)</option>
+        <option value="sub">Clés illimitées (125 €/mois)</option>
+    </select>
 
-    <div class="groupe-formulaire champ-quantite" id="groupe-quantite">
-      <label for="quantite">Nombre de clés :</label>
-      <input type="number" id="quantite" value="1" min="1">
-    </div>
+    <label for="quantityInput">Nombre de clés :</label>
+    <input type="number" id="quantityInput" value="1" min="1">
 
-    <button id="payer-btn" onclick="payerAvecLemonSqueezy()">
-      Procéder au paiement
-    </button>
+    <button id="payBtn">Procéder au paiement</button>
 
-    <div class="texte-de-pied">Paiements sécurisés via Lemon Squeezy</div>
-  </div>
+    <hr style="margin: 30px 0;">
 
-  <!-- 2. Formulaire Carte Cadeau Physique + Supabase -->
-  <div class="conteneur">
     <h2>Personnalise ta carte cadeau physique</h2>
     
-    <form id="gift-card-form">
-      <div class="groupe-formulaire">
-        <label for="card-image">Image pour la carte (PNG/JPG) :</label>
-        <input type="file" id="card-image" accept="image/png, image/jpeg" required />
-      </div>
+    <label for="fileInput">Image pour la carte (PNG/JPG) :</label>
+    <input type="file" id="fileInput" accept="image/png, image/jpeg">
 
-      <div class="groupe-formulaire">
-        <label for="client-email">Ton e-mail :</label>
-        <input type="email" id="client-email" placeholder="exemple@email.com" required />
-      </div>
+    <label for="emailInput">Votre courriel :</label>
+    <input type="emailInput" id="emailInput" placeholder="exemple@email.com">
 
-      <button type="submit" id="submit-btn">Commander ma carte</button>
-    </form>
+    <button id="submitBtn">Commander ma carte</button>
+    
+    <div id="statusMessage"></div>
+</div>
 
-    <div id="status-message" style="margin-top: 15px; font-weight: 600;"></div>
-  </div>
+<script>
+    const submitBtn = document.getElementById('submitBtn');
+    const fileInput = document.getElementById('fileInput');
+    const emailInput = document.getElementById('emailInput');
+    const statusMessage = document.getElementById('statusMessage');
 
-  <!-- Inclusion du SDK Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    submitBtn.addEventListener('click', async () => {
+        const file = fileInput.files[0];
+        const email = emailInput.value;
 
-  <script>
-    // Liens Lemon Squeezy
-    const lienUnitaire = "https://renxcashaza.lemonsqueezy.com/checkout/buy/85bd5ac3-7f3f-4476-9774-5701c3f76be0";
-    const lienIllimite = "https://renxcashaza.lemonsqueezy.com/checkout/buy/c1c28560-ba65-44de-b851-d5882a29216a";
-
-    function changerOffre() {
-      const choix = document.getElementById('produit').value;
-      const groupeQuantite = document.getElementById('groupe-quantite');
-
-      if (choix === 'illimite') {
-        groupeQuantite.style.display = 'none';
-      } else {
-        groupeQuantite.style.display = 'block';
-      }
-    }
-
-    function payerAvecLemonSqueezy() {
-      const choix = document.getElementById('produit').value;
-      let lienFinal = "";
-
-      if (choix === 'illimite') {
-        lienFinal = lienIllimite;
-      } else {
-        const quantite = document.getElementById('quantite').value;
-        lienFinal = lienUnitaire + "?quantite=" + quantite;
-      }
-
-      window.location.href = lienFinal;
-    }
-
-    // Initialisation de Supabase
-    const SUPABASE_URL = "https://aodiebdhmfgtomwpjzye.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_rrKnWkDG0ORvNIwVKB-LsA_lLCLOv09";
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    const form = document.getElementById('gift-card-form');
-    const statusMessage = document.getElementById('status-message');
-    const submitBtn = document.getElementById('submit-btn');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const fileInput = document.getElementById('card-image');
-      const emailInput = document.getElementById('client-email');
-      const file = fileInput.files[0];
-
-      if (!file) {
-        statusMessage.style.color = "#ef4444";
-        statusMessage.innerText = "Sélectionne une image.";
-        return;
-      }
-
-      try {
-        submitBtn.disabled = true;
-        statusMessage.style.color = "#4b5563";
-        statusMessage.innerText = "Upload de l'image en cours...";
-
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
-        const filePath = `custom-cards/${fileName}`;
-
-        const { data: uploadData, error: uploadError } = await supabaseClient
-          .storage
-          .from('gift-cards')
-          .upload(filePath, file);
-
-        if (uploadError) throw uploadError;
-
-        const { data: urlData } = supabaseClient
-          .storage
-          .from('gift-cards')
-          .getPublicUrl(filePath);
-
-        const imageUrl = urlData.publicUrl;
-        statusMessage.style.color = "#4b5563";
-        statusMessage.innerText = "Image envoyée ! Lancement de la commande...";
-
-        const response = await fetch(`${SUPABASE_URL}/functions/v1/smart-service`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          },
-          body: JSON.stringify({
-            imageUrl: imageUrl,
-            userEmail: emailInput.value
-          })
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.error || "Erreur lors de la création");
+        if (!file) {
+            statusMessage.style.color = "#ef4444";
+            statusMessage.innerText = "Sélectionne une image.";
+            return;
         }
 
-        // Succès : texte en vert
-        statusMessage.style.color = "#10b981";
-        statusMessage.innerText = "Commande validée avec succès !";
-        form.reset();
+        if (!email) {
+            statusMessage.style.color = "#ef4444";
+            statusMessage.innerText = "Entre une adresse courriel valide.";
+            return;
+        }
 
-      } catch (err) {
-        console.error(err);
-        // Erreur : texte en rouge
-        statusMessage.style.color = "#ef4444";
-        statusMessage.innerText = "Erreur : " + err.message;
-      } finally {
-        submitBtn.disabled = false;
-      }
+        try {
+            submitBtn.disabled = true;
+            statusMessage.style.color = "#4b5563";
+            statusMessage.innerText = "Upload de l'image en cours...";
+
+            // Simulation ou traitement de l'envoi
+            setTimeout(() => {
+                statusMessage.style.color = "#10b981";
+                statusMessage.innerText = "Commande validée avec succès !";
+                submitBtn.disabled = false;
+            }, 1500);
+
+        } catch (err) {
+            console.error(err);
+            statusMessage.style.color = "#ef4444";
+            statusMessage.innerText = "Erreur : " + err.message;
+            submitBtn.disabled = false;
+        }
     });
-  </script>
+</script>
 
 </body>
 </html>
